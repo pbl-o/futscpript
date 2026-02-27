@@ -1,27 +1,19 @@
-const { Pool } = require('pg')
+import { Pool } from "pg";
+import dotenv from "dotenv";
+dotenv.config();
 
-const pool = new Pool({
-    host: 'localhost',
-    user: 'postgres',
-    password: 'postgres',
-    database: 'futscript',
-    allowExitOnIdle: true
-})
+export const pool = new Pool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_DATABASE,
+  allowExitOnIdle: true,
+});
 
-const getTeams = async () => {
-    //...
-}
-
-const getPlayers = async (teamID) => {
-    //...
-}
-
-const addTeam = async (equipo) => {
-    //...
-}
-
-const addPlayer = async ({ jugador, teamID }) => {
-    //...
-}
-
-module.exports = { getTeams, addTeam, getPlayers, addPlayer }
+export const getDataConnection = async () => {
+  const { rows } = await pool.query("SELECT NOW()");
+  if (!rows || rows.length === 0) {
+    console.log(error);
+  }
+  console.log(`Database connected at ${rows[0].now}`);
+};

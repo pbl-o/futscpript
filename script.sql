@@ -2,6 +2,15 @@
 CREATE DATABASE futscript;
 \c futscript;
 
+drop database futscript
+
+drop table equipos
+
+drop table jugadores
+
+drop table posiciones
+
+
 CREATE TABLE equipos (id SERIAL PRIMARY KEY, name VARCHAR(250) NOT NULL);
 
 CREATE TABLE posiciones (id SERIAL PRIMARY KEY, name VARCHAR(250) NOT NULL);
@@ -13,3 +22,10 @@ INSERT INTO posiciones values
 (DEFAULT, 'centrocampista'),
 (DEFAULT, 'defensa'),
 (DEFAULT, 'portero');
+
+
+select * from equipos
+
+select * from posiciones
+
+select * from jugadores
