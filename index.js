@@ -1,14 +1,14 @@
 import dotenv from "dotenv";
-dotenv.config()
+dotenv.config();
 import express from "express";
 import router from "./routes/routes.js";
 import { getDataConnection } from "./db/consultas.js";
 
 //Temas pendientes, crear carpeta lib con errores más comunes.
-//crear middleware para evaluación de tokens
+//Crear middleware para evaluación de tokens
 
 const app = express();
-const PORT = process.env.API_PORT
+const PORT = process.env.API_PORT;
 
 app.listen(PORT, () => {
   console.log("SERVER ON");
@@ -16,8 +16,7 @@ app.listen(PORT, () => {
 });
 
 app.use(express.json());
-app.use('/equipos', router)
-
+app.use("/equipos", router);
 
 import controllerUser from "./controllers/controller.login.js";
 
@@ -25,7 +24,7 @@ import controllerUser from "./controllers/controller.login.js";
 app.post("/login", controllerUser.verifyUser);
 
 app.use("*", (req, res) => {
-    res.status(404).send({ message: "La ruta que intenta consultar no existe" })
-})
+  res.status(404).send({ message: "La ruta que intenta consultar no existe" });
+});
 
-export default app
+export default app;

@@ -1,6 +1,5 @@
 import { pool } from "../db/consultas.js";
 
-
 const getTeams = async () => {
   const consulta = "SELECT * from equipos";
   const { rows: equipos } = await pool.query(consulta);
