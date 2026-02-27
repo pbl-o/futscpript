@@ -4,39 +4,61 @@ import jwt from "jsonwebtoken";
 const secretKey = process.env.SECRET_KEY;
 
 const obtenerEquipos = async (req, res) => {
-    //////////////!!!!!!REVISAR!!!!!!!!
+  try {
     const Authorization = req.header("Authorization");
     const token = Authorization.split("Bearer ")[1];
+
+    if (!Authorization) {
+      throw { code: 401, message: "No token or no valid token" };
+    }
+
     //verificar
     jwt.verify(token, `${secretKey}`);
     //ejectuar acción autorizada
 
     //decode email
     const { name } = jwt.decode(token);
-    console.log(`Usuario ${name}: Acceso a datos autorizado -> Obtener Equipos `);
+    console.log(
+      `Usuario ${name}: Acceso a datos autorizado -> Obtener Equipos `,
+    );
 
-  const equipos = await modelEquipos.getTeams();
-  res.json(equipos);
+    const equipos = await modelEquipos.getTeams();
+    res.status(200).json(equipos);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(error.code || 500)
+      .json({ message: message.error || "Error del servidor" });
+  }
 };
 
 const agregarEquipo = async (req, res) => {
-  const equipo = req.body;
+  try {
+    const equipo = req.body;
 
-  //////////////!!!!!!REVISAR!!!!!!!!
-  const Authorization = req.header("Authorization");
-  const token = Authorization.split("Bearer ")[1];
-  //verificar
-  jwt.verify(token, `${secretKey}`);
-  //ejectuar acción autorizada
+    const Authorization = req.header("Authorization");
+    const token = Authorization.split("Bearer ")[1];
 
-  //decode email
-  const { name } = jwt.decode(token);
-  console.log(
-    `Usuario ${name}: Acceso a datos autorizado -> Agregar un equipo `,
-  );
+      if (!Authorization) {
+      throw { code: 401, message: "No token or no valid token" };
+    }
 
-  await modelEquipos.addTeam(equipo);
-  res.send({ message: "Equipo agregado con éxito" });
+    
+    //verificar
+    jwt.verify(token, `${secretKey}`);
+    //ejectuar acción autorizada
+
+    //decode email
+    const { name } = jwt.decode(token);
+    console.log(
+      `Usuario ${name}: Acceso a datos autorizado -> Agregar un equipo `,
+    );
+
+    await modelEquipos.addTeam(equipo);
+    res.send({ message: "Equipo agregado con éxito" });
+  } catch (error) {
+    res.status(error.code || 500).json({message: error.message || "Error del servidor"})
+  }
 };
 
 const controllerEquipos = { obtenerEquipos, agregarEquipo };
