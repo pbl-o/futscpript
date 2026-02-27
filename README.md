@@ -1,4 +1,4 @@
-# Cafetería - Test Unitario
+# Futscript
 
 API REST conectada a una base de datos PostgreSQL evaluada vía Testing Unitario con Jest.
 
