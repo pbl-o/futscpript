@@ -59,15 +59,17 @@ npm run test-exit
 
 5. Para experimentar las rutas via Thunderclient | Postman
 
-- POST /Login -> insertar nombre de usario y password (.env), si son correctas se recibirá un token de vuelta (copiar token)
+- POST /Login -> insertar nombre de usario y password (.env), si las credenciales son correctas se recibirá un token de vuelta (copiar token)
 
-- GET /equipos -> Agregar cabeceras: Authorization; Bearer <token> // Si las credenciales son correctas se recibe una lista con los equipos existentes.  
-- POST /equipos -> Agregar cabeceras: Authorization; Bearer <token> // Si las credenciales son correctas se agrega un equoipo a la lista con los equipos existentes.   
-* modelo de body => {"name": <string>, "password": <string || number>}
+- GET /equipos -> Agregar cabeceras y pegar token a continuación de Bearer: Authorization; Bearer <token> // Si las credenciales son correctas se recibe una lista con los equipos existentes.  
 
-- GET /equipos/:id/jugadores -> Agregar cabeceras: Authorization; Bearer <token> // Si las credenciales son correctas se recibe una lista con los jugadores del equipo que corresponda al Id añadido en el request.  
-- POST /equipos/:id/jugadores -> Agregar cabeceras: Authorization; Bearer <token> // Si las credenciales son correctas se añade un jugador a una lista de equipo que corresponda al Id añadido en el request.   
-* modelo de body = {"name":<string>, position:<número entre 1 y 4>}  
+- POST /equipos -> Agregar cabeceras y pegar token a continuación de Bearer: Authorization; Bearer <token> // Si las credenciales son correctas se agrega un equipo a la lista con los equipos existentes.   Agregar cabeceras y pegar token a continuación de Bearer
+* modelo de body => {"name": <type_string>, "password": <type_string || type_number>}
+
+- GET /equipos/:id/jugadores -> Agregar cabeceras y pegar token a continuación de Bearer: Authorization; Bearer <token> // Si las credenciales son correctas se recibe una lista con los jugadores del equipo que corresponda al Id añadido en el request.  
+
+- POST /equipos/:id/jugadores -> Agregar cabeceras y pegar token a continuación de Bearer: Authorization; Bearer <token> // Si las credenciales son correctas se añade un jugador a una lista de equipo que corresponda al Id añadido en el request.   
+* modelo de body = {"name":<type_string>, position:<type_number entre 1 y 4>}  
 
 Pablo E. Díaz. A.
 
