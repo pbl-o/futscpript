@@ -69,7 +69,7 @@ npm run test-exit
 - GET /equipos/:id/jugadores -> Agregar cabeceras y pegar token a continuación de Bearer: Authorization; Bearer <token> // Si las credenciales son correctas se recibe una lista con los jugadores del equipo que corresponda al Id añadido en el request.  
 
 - POST /equipos/:id/jugadores -> Agregar cabeceras y pegar token a continuación de Bearer: Authorization; Bearer <token> // Si las credenciales son correctas se añade un jugador a una lista de equipo que corresponda al Id añadido en el request.   
-* modelo de body = {"name":<type_string>, position:<type_number entre 1 y 4>}  
+* modelo de body = {"name":<type_string>, "position":<type_number entre 1 y 4>}  
 
 Pablo E. Díaz. A.
 
