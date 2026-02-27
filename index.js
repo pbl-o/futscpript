@@ -4,7 +4,8 @@ import express from "express";
 import router from "./routes/routes.js";
 import { getDataConnection } from "./db/consultas.js";
 
-//Temas pendientes, crear carpeta lib con errores más comunes.
+//Por razones de tiempo queda pendiente (para ser implementado en un futuro próximo):
+//Crear carpeta lib con errores más comunes.
 //Crear middleware para evaluación de tokens
 
 const app = express();

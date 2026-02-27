@@ -16,7 +16,6 @@ const obtenerEquipos = async (req, res) => {
     try {
       //verificar
       jwt.verify(token, `${secretKey}`);
-      //ejectuar acción autorizada
 
       //decode email
       const { name } = jwt.decode(token);
@@ -57,7 +56,6 @@ const agregarEquipo = async (req, res) => {
     try {
       //verificar
       jwt.verify(token, `${secretKey}`);
-      //ejectuar acción autorizada
 
       //decode email
       const { name } = jwt.decode(token);

@@ -17,7 +17,6 @@ const obtenerJugadores = async (req, res) => {
     try {
       //verificar
       jwt.verify(token, `${secretKey}`);
-      //ejectuar acción autorizada
 
       //decode email
       const { name } = jwt.decode(token);
@@ -59,7 +58,6 @@ const registrarJugador = async (req, res) => {
     try {
       //verificar
       jwt.verify(token, `${secretKey}`);
-      //ejectuar acción autorizada
 
       //decode email
       const { name } = jwt.decode(token);
