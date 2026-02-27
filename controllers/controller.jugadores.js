@@ -8,20 +8,25 @@ const obtenerJugadores = async (req, res) => {
     const { teamID } = req.params;
 
     const Authorization = req.header("Authorization");
-    const token = Authorization.split("Bearer ")[1];
     if (!Authorization) {
       throw { code: 401, message: "No token or no valid token" };
     }
 
-    //verificar
-    jwt.verify(token, `${secretKey}`);
-    //ejectuar acción autorizada
+    const token = Authorization.split("Bearer ")[1];
 
-    //decode email
-    const { name } = jwt.decode(token);
-    console.log(
-      `Usuario ${name}: Acceso a datos autorizado -> Obtener jugadores `,
-    );
+    try {
+      //verificar
+      jwt.verify(token, `${secretKey}`);
+      //ejectuar acción autorizada
+
+      //decode email
+      const { name } = jwt.decode(token);
+      console.log(
+        `Usuario ${name}: Acceso a datos autorizado -> Obtener jugadores `,
+      );
+    } catch (error) {
+      throw { code: 401, message: "Invalid Token" };
+    }
 
     const jugadores = await modelJugadores.getPlayers(teamID);
     res.status(200).json(jugadores);
@@ -40,7 +45,7 @@ const registrarJugador = async (req, res) => {
     const Authorization = req.header("Authorization");
     const token = Authorization.split("Bearer ")[1];
 
-        if (!Authorization) {
+    if (!Authorization) {
       throw { code: 401, message: "No token or no valid token" };
     }
 

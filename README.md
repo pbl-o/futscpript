@@ -22,7 +22,34 @@ git clone https://github.com/pbl-o/cafeteria-tests.git
 npm install
 ```
 
-3. Para ejecutar el test, utilizar el siguiente comando:
+3. completar el archivo .env.example con las propias credenciales
+
+.env.example:
+
+```bash
+#LISTENING PORT 
+
+API_PORT='set Api port'
+
+#DATABASE_CREDENTIALS
+
+DB_HOST='set a host'
+DB_USER='set a username'
+DB_PASS='set a password'
+DB_DATABASE='set database'
+DB_PORT='set a databas port'
+
+#SECRET KEY
+
+SECRET_KEY='set a secret key to use with jwt'
+
+ADM_PASSWORD='set the admin password'
+ADM_USERNAME='se the admin username'
+
+
+```
+
+4. Para ejecutar el test, utilizar el siguiente comando:
 
 ```bash
 
@@ -30,7 +57,17 @@ npm run test-exit
 
 ```
 
+5. Para experimentar las rutas via Thunderclient | Postman
+
+- POST /Login -> insertar nombre de usario y password (.env), si son correctas se recibirá un token de vuelta (copiar token)
+
+- GET /equipos -> Agregar cabeceras: Authorization; Bearer <token> // Si las credenciales son correctas se recibe una lista con los equipos existentes.  
+- POST /equipos -> Agregar cabeceras: Authorization; Bearer <token> // Si las credenciales son correctas se agrega un equoipo a la lista con los equipos existentes.   
+* modelo de body => {"name": <string>, "password": <string || number>}
+
+- GET /equipos/:id/jugadores -> Agregar cabeceras: Authorization; Bearer <token> // Si las credenciales son correctas se recibe una lista con los jugadores del equipo que corresponda al Id añadido en el request.  
+- POST /equipos/:id/jugadores -> Agregar cabeceras: Authorization; Bearer <token> // Si las credenciales son correctas se añade un jugador a una lista de equipo que corresponda al Id añadido en el request.   
+* modelo de body = {"name":<string>, position:<número entre 1 y 4>}  
+
 Pablo E. Díaz. A.
 
-
-!! Faltan las rutas
