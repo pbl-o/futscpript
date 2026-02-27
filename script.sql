@@ -23,6 +23,11 @@ INSERT INTO posiciones values
 (DEFAULT, 'defensa'),
 (DEFAULT, 'portero');
 
+INSERT INTO equipos values
+(DEFAULT, 'Colo-Colo'),
+(DEFAULT, 'Huachipato'),
+(DEFAULT, 'UC'),
+(DEFAULT, 'U');
 
 select * from equipos
 

@@ -4,6 +4,8 @@ import express from "express";
 import router from "./routes/routes.js";
 import { getDataConnection } from "./db/consultas.js";
 
+//Temas pendientes, crear carpeta lib con errores más comunes.
+//crear middleware para evaluación de tokens
 
 const app = express();
 const PORT = process.env.API_PORT

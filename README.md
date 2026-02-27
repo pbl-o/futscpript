@@ -56,6 +56,20 @@ ADM_USERNAME='se the admin username'
 npm run test-exit 
 
 ```
+4. Para un correcto funcionamiento de la base de datos a la hora de ejecutar los tests (sobre todo el TEST 4), se recomienda insertar equipos y profesiones:
+
+* Ir a sript.sql y activar crear todas las tablase / insertar todos los datos.
+* También se puede copiar la lista de equipos o agregar manualmente vía (API o SQL)
+
+```SQL
+
+INSERT INTO equipos values
+(DEFAULT, 'Colo-Colo'),
+(DEFAULT, 'Huachipato'),
+(DEFAULT, 'UC'),
+(DEFAULT, 'U');
+
+```
 
 5. Para experimentar las rutas via Thunderclient | Postman
 

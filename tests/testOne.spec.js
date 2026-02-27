@@ -5,7 +5,7 @@ const adminName = process.env.ADM_USERNAME;
 const adminPassword = process.env.ADM_PASSWORD;
 
 describe("Tests de request payload y stauts code", () => {
-  it(" Se obtiene un Array y un status code 200 como respuesta de la ruta GET /equipos", async () => {
+  it("TEST:1 Se obtiene un Array y un status code 200 como respuesta de la ruta GET /equipos", async () => {
     //Check token
 
     const { body: loginBody } = await request(app)
@@ -22,7 +22,7 @@ describe("Tests de request payload y stauts code", () => {
     expect(statusCode).toBe(200);
     expect(equipos).toBeInstanceOf(Array);
   });
-  it("Al enviar las credenciales correctas en la ruta POST /login se obtiene un Object", async () => {
+  it("TEST 2: Al enviar las credenciales correctas en la ruta POST /login se obtiene un Object", async () => {
     const credenciales = { name: adminName, password: adminPassword };
     const { body: acceso } = await request(app)
       .post("/login")
@@ -31,7 +31,7 @@ describe("Tests de request payload y stauts code", () => {
     expect(acceso).toBeInstanceOf(Object);
   });
 
-  it("Al enviar credenciales incorrectas en la ruta POST /login se obtiene un status code 400", async () => {
+  it("TEST 3: Al enviar credenciales incorrectas en la ruta POST /login se obtiene un status code 400", async () => {
     const credenciales = { name: "Waldo", password: "My name is Waldo" };
     const { body: acceso, statusCode } = await request(app)
       .post("/login")
@@ -40,7 +40,7 @@ describe("Tests de request payload y stauts code", () => {
     expect(statusCode).toBe(400);
   });
 
-  it("Al enviar un nuevo jugador en la ruta POST /equipos/:teamID/jugadores junto a un token válido en las cabeceras se obtiene un status code 201.", async () => {
+  it("TEST 4: Al enviar un nuevo jugador en la ruta POST /equipos/:teamID/jugadores junto a un token válido en las cabeceras se obtiene un status code 201.", async () => {
     //Check token
 
     const { body: loginBody } = await request(app)

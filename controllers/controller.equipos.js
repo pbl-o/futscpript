@@ -6,29 +6,39 @@ const secretKey = process.env.SECRET_KEY;
 const obtenerEquipos = async (req, res) => {
   try {
     const Authorization = req.header("Authorization");
-    const token = Authorization.split("Bearer ")[1];
 
     if (!Authorization) {
       throw { code: 401, message: "No token or no valid token" };
     }
 
-    //verificar
-    jwt.verify(token, `${secretKey}`);
-    //ejectuar acción autorizada
+    const token = Authorization.split("Bearer ")[1];
 
-    //decode email
-    const { name } = jwt.decode(token);
-    console.log(
-      `Usuario ${name}: Acceso a datos autorizado -> Obtener Equipos `,
-    );
+    try {
+      //verificar
+      jwt.verify(token, `${secretKey}`);
+      //ejectuar acción autorizada
+
+      //decode email
+      const { name } = jwt.decode(token);
+      console.log(
+        `Usuario ${name}: Acceso a datos autorizado -> Obtener Equipos `,
+      );
+    } catch (error) {
+      throw { code: 401, message: "Invalid Token" };
+    }
 
     const equipos = await modelEquipos.getTeams();
     res.status(200).json(equipos);
   } catch (error) {
     console.log(error);
+
+        if (error.code === "42P01") {
+      return res.status(404).json({message: "Database not found" });
+    }
+
     res
       .status(error.code || 500)
-      .json({ message: message.error || "Error del servidor" });
+      .json({ message: error.message || "Error del servidor" });
   }
 };
 
@@ -37,27 +47,40 @@ const agregarEquipo = async (req, res) => {
     const equipo = req.body;
 
     const Authorization = req.header("Authorization");
-    const token = Authorization.split("Bearer ")[1];
 
-      if (!Authorization) {
+    if (!Authorization) {
       throw { code: 401, message: "No token or no valid token" };
     }
 
-    
-    //verificar
-    jwt.verify(token, `${secretKey}`);
-    //ejectuar acción autorizada
+    const token = Authorization.split("Bearer ")[1];
 
-    //decode email
-    const { name } = jwt.decode(token);
-    console.log(
-      `Usuario ${name}: Acceso a datos autorizado -> Agregar un equipo `,
-    );
+    try {
+      //verificar
+      jwt.verify(token, `${secretKey}`);
+      //ejectuar acción autorizada
+
+      //decode email
+      const { name } = jwt.decode(token);
+      console.log(
+        `Usuario ${name}: Acceso a datos autorizado -> Agregar un equipo `,
+      );
+    } catch (error) {
+      throw { code: 401, message: "Invalid Token" };
+    }
 
     await modelEquipos.addTeam(equipo);
     res.send({ message: "Equipo agregado con éxito" });
   } catch (error) {
-    res.status(error.code || 500).json({message: error.message || "Error del servidor"})
+
+    console.log(error)
+
+    if (error.code === "42P01") {
+      return res.status(404).json({message: "Database not found" });
+    }
+
+    res
+      .status(error.code || 500)
+      .json({ message: error.message || "Error del servidor" });
   }
 };
 
